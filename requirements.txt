@@ -24,7 +24,7 @@ pytz==2023.3.post1
 regex==2023.10.3
 requests==2.23.0
 scikit-learn==1.0.2
-scipy==1.11.3
+scipy==1.7.3
 six==1.16.0
 soupsieve==2.5
 threadpoolctl==3.2.0
