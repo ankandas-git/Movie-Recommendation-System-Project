@@ -3,21 +3,8 @@
 ![Frontend](https://img.shields.io/badge/Frontend-HTML/CSS/JS-green)
 ![API](https://img.shields.io/badge/API-TMDB-fcba03)
 
-**Updated version of this application can be found at:**
-
 ## Movie-Recommender-System
-I've developed a application is that I've used the TMDB's recommendation engine. Just type the movie name and click on "enter". 
-
-
-## How to run
-
-1. Clone or download this repository to your local machine.
-2. Install all the libraries mentioned in the [requirements.txt] file with the command `pip install -r requirements.txt`
-3. Get your API key from https://www.themoviedb.org/. (Refer the above section on how to get the API key)
-3. Replace YOUR_API_KEY in **both** the places (line no. 15 and 29) of `static/recommend.js` file and hit save.
-4. Open your terminal/command prompt from your project directory and run the file `main.py` by executing the command `python main.py`.
-5. Go to your browser and type `http://127.0.0.1:5000/` in the address bar.
-6. Hurray! That's it.
+we developed a application is that used the TMDB's recommendation engine.you Just type the movie name and click on "enter". 
 
 ## Architecture
 
@@ -29,7 +16,7 @@ Cosine similarity is a metric used to measure how similar the documents are irre
   ![image](https://user-images.githubusercontent.com/36665975/70401457-a7530680-1a55-11ea-9158-97d4e8515ca4.png)
 
   
-More about Cosine Similarity : [Understanding the Math behind Cosine Similarity](https://www.machinelearningplus.com/nlp/cosine-similarity/)
+More about Cosine Similarity : [More Learn](https://www.machinelearningplus.com/nlp/cosine-similarity/)
 
 ### Sources we are use
 
