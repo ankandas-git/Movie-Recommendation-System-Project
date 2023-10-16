@@ -1,6 +1,5 @@
-
 $(function() {
-// Button will be disabled until we type anything inside the input field
+  // Button will be disabled until we type anything inside the input field
   const source = document.getElementById('autoComplete');
   const inputHandler = function(e) {
     if(e.target.value==""){
@@ -13,7 +12,7 @@ $(function() {
   source.addEventListener('input', inputHandler);
 
   $('.movie-button').on('click',function(){
-    var my_api_key = '56a0e6669ed0a0863a1deb658dcc12b9';
+    var my_api_key = 'fb5641daf874609fe72994993b634029';
     var title = $('.movie').val();
     if (title=="") {
       $('.results').css('display','none');
@@ -26,10 +25,9 @@ $(function() {
 });
 
 // will be invoked when clicking on the recommended movies
-
 function recommendcard(e){
-  var my_api_key = '56a0e6669ed0a0863a1deb658dcc12b9';
-  var title = e.getAttribute('title'); 
+  var my_api_key = 'fb5641daf874609fe72994993b634029';
+  var title = e.getAttribute('title');
   load_details(my_api_key,title);
 }
 
@@ -38,11 +36,12 @@ function load_details(my_api_key,title){
   $.ajax({
     type: 'GET',
     url:'https://api.themoviedb.org/3/search/movie?api_key='+my_api_key+'&query='+title,
+
     success: function(movie){
       if(movie.results.length<1){
         $('.fail').css('display','block');
-        $('.results').css('display','block');
-        $("#loader").delay(50).fadeOut();
+        $('.results').css('display','none');
+        $("#loader").delay(500).fadeOut();
       }
       else{
         $("#loader").fadeIn();
@@ -87,7 +86,7 @@ function movie_recs(movie_title,movie_id,my_api_key){
       alert("error recs");
       $("#loader").delay(500).fadeOut();
     },
-  }); 
+  });
 }
 
 // get all the details of the movie using the movie id.
@@ -96,7 +95,7 @@ function get_movie_details(movie_id,my_api_key,arr,movie_title) {
     type:'GET',
     url:'https://api.themoviedb.org/3/movie/'+movie_id+'?api_key='+my_api_key,
     success: function(movie_details){
-        show_details(movie_details,arr,movie_title,my_api_key,movie_id);
+      show_details(movie_details,arr,movie_title,my_api_key,movie_id);
     },
     error: function(){
       alert("API Error!");
@@ -128,11 +127,11 @@ function show_details(movie_details,arr,movie_title,my_api_key,movie_id){
     runtime = Math.floor(runtime/60)+" hour(s) "+(runtime%60)+" min(s)"
   }
   arr_poster = get_movie_posters(arr,my_api_key);
-  
+
   movie_cast = get_movie_cast(movie_id,my_api_key);
-  
+
   ind_cast = get_individual_cast(movie_cast,my_api_key);
-  
+
   details = {
     'title':movie_title,
       'cast_ids':JSON.stringify(movie_cast.cast_ids),

@@ -8,7 +8,7 @@ import bs4 as bs
 import urllib.request
 import pickle
 import requests
-
+from datetime import date, datetime
 # load the nlp model and tfidf vectorizer from disk
 filename = 'nlp_model.pkl'
 clf = pickle.load(open(filename, 'rb'))
@@ -58,8 +58,7 @@ def get_suggestions():
     return list(data['movie_title'].str.capitalize())
 
 
-app = Flask(__name__)
-
+app = Flask(__name__ , template_folder='templates')
 
 @app.route("/")
 @app.route("/home")
@@ -81,7 +80,6 @@ def similarity():
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
-    # getting data from AJAX request
     title = request.form['title']
     cast_ids = request.form['cast_ids']
     cast_names = request.form['cast_names']
@@ -101,7 +99,6 @@ def recommend():
     status = request.form['status']
     rec_movies = request.form['rec_movies']
     rec_posters = request.form['rec_posters']
-
     # get movie suggestions for auto complete
     suggestions = get_suggestions()
 
@@ -149,10 +146,13 @@ def recommend():
             reviews_status.append('Good' if pred else 'Bad')
 
     # combining reviews and comments into a dictionary
-    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))} 
+    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}
     # passing all the data to the html file
-    return render_template('recommend.html',title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,
+    if request.method == 'POST':
+        return render_template('recommend.html',title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,
                             movie_cards=movie_cards, reviews=movie_reviews, casts=casts, cast_details=cast_details)
+    else:
+        return render_template()
 
-if __name__ == '__main__':
+if __name__ == '__main__' :
     app.run(debug=True)
