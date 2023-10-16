@@ -44,6 +44,7 @@
 
 h1 {
     font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-align: center;
     color: #e50914;
     font-weight: bold;
     margin-top: 30px;

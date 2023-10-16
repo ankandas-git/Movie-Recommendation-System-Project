@@ -26,6 +26,7 @@ $(function() {
 });
 
 // will be invoked when clicking on the recommended movies
+
 function recommendcard(e){
   var my_api_key = '56a0e6669ed0a0863a1deb658dcc12b9';
   var title = e.getAttribute('title'); 
@@ -40,8 +41,8 @@ function load_details(my_api_key,title){
     success: function(movie){
       if(movie.results.length<1){
         $('.fail').css('display','block');
-        $('.results').css('display','none');
-        $("#loader").delay(500).fadeOut();
+        $('.results').css('display','block');
+        $("#loader").delay(50).fadeOut();
       }
       else{
         $("#loader").fadeIn();
