@@ -1,12 +1,12 @@
 new autoComplete({
-    data: {                              // Data src [Array, Function, Async] | (REQUIRED)
+    data: {
       src: films,
     },
-    selector: "#autoComplete",           // Input field selector              | (Optional)
-    threshold: 2,                        // Min. Chars length to start Engine | (Optional)
-    debounce: 100,                       // Post duration for engine to start | (Optional)
-    searchEngine: "strict",              // Search Engine type/mode           | (Optional)
-    resultsList: {                       // Rendered results list object      | (Optional)
+    selector: "#autoComplete",           // Input field selector
+    threshold: 2,                        // Min. Chars length to start Engine
+    debounce: 100,                       // Post duration for engine to start
+    searchEngine: "strict",             // Search Engine type/mode
+    resultsList: {                       // Rendered results list object
         render: true,
         container: source => {
             source.setAttribute("id", "food_list");
@@ -15,9 +15,9 @@ new autoComplete({
         position: "afterend",
         element: "ul"
     },
-    maxResults: 5,                         // Max. number of rendered results | (Optional)
-    highlight: true,                       // Highlight matching results      | (Optional)
-    resultItem: {                          // Rendered result item            | (Optional)
+    maxResults: 5,                         // Max. number of rendered results
+    highlight: true,                       // Highlight matching results
+    resultItem: {                          // Rendered result item
         content: (data, source) => {
             source.innerHTML = data.match;
         },
@@ -30,7 +30,7 @@ new autoComplete({
         result.innerHTML = "No Results";
         document.querySelector("#autoComplete_list").appendChild(result);
     },
-    onSelection: feedback => {             // Action script onSelection event | (Optional)
+    onSelection: feedback => {             // Action script onSelection event
         document.getElementById('autoComplete').value = feedback.selection.value;
     }
 });

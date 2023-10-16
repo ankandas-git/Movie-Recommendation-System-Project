@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>NEW</title>
+	<title>MRS Project</title>
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,7 +51,7 @@
 <br/>
 	
 {% for name, details in cast_details.items() if not cast_details.hidden %}
-  <div class="modal fade" id="{{details[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal fade" id="{ {details[0]} }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #e50914;color: white;">
@@ -117,23 +117,27 @@
                     <th class="text-center" scope="col">Sentiments</th>
                 </tr>
             </thead>
-    
+
             <tbody>
-		      {% for review, status in reviews.items() if not reviews.hidden %}
-		      <tr style="background-color:#e5091485;">
-              	  <td>{{review}}</td>
-	              <td><center>
-	                  {{status}} : 
-	                  {% if status =='Good' %}
-	                    &#128515;
-	                  {% else %}
-	                    &#128534;
-	                  {% endif %}
-	                </center>
-	              </td>
-          		</tr>
-      			{% endfor %}
-    		</tbody>
+            { % for review, status in reviews.items() if not reviews.hidden % }
+            <tr style="background-color:#e5091485;">
+                <td>{{review}}</td>
+                <td>
+                    <center>
+                        {{status}} :
+                        {% if status =='Good' %}
+                        &#128515;
+                        {% else %}
+                        &#128534;
+                        {% endif %}
+                    </center>
+                </td>
+            </tr>
+            //
+            </tbody>
+            <tbody>
+            {%endfor%}
+            </tbody>
  		 </table>
     </div>
     {% else %}
