@@ -1,33 +1,32 @@
 import numpy as np
 import pandas as pd
-from flask import Flask, render_template, request
+from flask import Flask, render_template, templating, request
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 import bs4 as bs
 import urllib.request
 import pickle
+import jinja2
 import requests
-from scipy.sparse import csr_matrix
 
-from datetime import date, datetime
 # load the nlp model and tfidf vectorizer from disk
 filename = 'nlp_model.pkl'
 clf = pickle.load(open(filename, 'rb'))
 vectorizer = pickle.load(open('tranform.pkl', 'rb'))
 
-#vectorizer = pickle.load(csr_matrix(open('tranform.pkl', 'rb')))
 
 def create_similarity():
     data = pd.read_csv('main_data.csv')
     # creating a count matrix
     cv = CountVectorizer()
     count_matrix = cv.fit_transform(data['comb'])
-
     # creating a similarity score matrix
     similarity = cosine_similarity(count_matrix)
     return data, similarity
-def rcmd(m, data=None, similarity=None):
+
+
+def rcmd(m):
     m = m.lower()
     try:
         data.head()
@@ -35,7 +34,7 @@ def rcmd(m, data=None, similarity=None):
     except:
         data, similarity = create_similarity()
     if m not in data['movie_title'].unique():
-        return('Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies')
+        return ('Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies')
     else:
         i = data.loc[data['movie_title'] == m].index[0]
         lst = list(enumerate(similarity[i]))
@@ -61,7 +60,8 @@ def get_suggestions():
     return list(data['movie_title'].str.capitalize())
 
 
-app = Flask(__name__ , template_folder='templates')
+app = Flask(__name__)
+
 
 @app.route("/")
 @app.route("/home")
@@ -81,8 +81,9 @@ def similarity():
         return m_str
 
 
-@app.route("/recommend",methods=["POST"])
+@app.route("/recommend", methods=["POST"])
 def recommend():
+    # getting data from AJAX request
     title = request.form['title']
     cast_ids = request.form['cast_ids']
     cast_names = request.form['cast_names']
@@ -132,32 +133,34 @@ def recommend():
 
     cast_details = {cast_names[i]: [cast_ids[i], cast_profiles[i], cast_bdays[i], cast_places[i], cast_bios[i]] for i in
                     range(len(cast_places))}
-    if (imdb_id != ""):
-        # web scraping to get user reviews from IMDB site
-        sauce = urllib.request.urlopen('https://www.imdb.com/title/{}/reviews?ref_=tt_ov_rt'.format(imdb_id)).read()
-        soup = bs.BeautifulSoup(sauce, 'lxml')
-        soup_result = soup.find_all("div", {"class": "text show-more__control"})
 
-        reviews_list = []  # list of reviews
-        reviews_status = []  # list of comments (good or bad)
-        for reviews in soup_result:
-            if reviews.string:
-                reviews_list.append(reviews.string)
-                # passing the review to our model
-                movie_review_list = np.array([reviews.string])
-                movie_vector = vectorizer.transform(movie_review_list)
-                pred = clf.predict(movie_vector)
-                reviews_status.append('Good' if pred else 'Bad')
+    # web scraping to get user reviews from IMDB site
+    sauce = urllib.request.urlopen('https://www.imdb.com/title/{}/reviews?ref_=tt_ov_rt'.format(imdb_id)).read()
+    soup = bs.BeautifulSoup(sauce, 'lxml')
+    soup_result = soup.find_all("div", {"class": "text show-more__control"})
 
-        # combining reviews and comments into a dictionary
-        movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}
+    reviews_list = []  # list of reviews
+    reviews_status = []  # list of comments (good or bad)
+    for reviews in soup_result:
+        if reviews.string:
+            reviews_list.append(reviews.string)
+            # passing the review to our model
+            movie_review_list = np.array([reviews.string])
+            movie_vector = vectorizer.transform(movie_review_list)
+            pred = clf.predict(movie_vector)
+            reviews_status.append('Good' if pred else 'Bad')
 
-        # passing all the data to the html file
-        return render_template('recommend.html',title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,
-                                movie_cards=movie_cards, reviews=movie_reviews, casts=casts, cast_details=cast_details)
+    # combining reviews and comments into a dictionary
+    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}
+
+    # passing all the data to the html file
+    if request.method == 'POST':
+         return render_template('recommend.html', title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,movie_cards=movie_cards, reviews=movie_reviews, casts=casts, cast_details=cast_details )
     else:
-        return render_template('recommend.html', title=title, poster=poster, overview=overview,vote_average='', vote_count='', release_date='',
-                               runtime=runtime, status=status, genres=genres, movie_cards=movie_cards, reviews='', casts=casts, cast_details=cast_details)
+        return render_template('recommend.html', title=title, poster=poster, overview=overview,
+                               vote_average=vote_average, vote_count='', release_date=release_date,
+                               runtime=runtime, status=status, genres=genres, movie_cards=movie_cards,
+                               reviews='', casts=casts, cast_details=cast_details)
 
-if __name__ == '__main__' :
+if __name__ == '__main__':
     app.run(debug=True)
