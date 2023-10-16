@@ -24,7 +24,6 @@ def create_similarity():
     similarity = cosine_similarity(count_matrix)
     return data, similarity
 
-
 def rcmd(m, data=None, similarity=None):
     m = m.lower()
     try:
@@ -150,11 +149,10 @@ def recommend():
             reviews_status.append('Good' if pred else 'Bad')
 
     # combining reviews and comments into a dictionary
-    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}
-
+    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))} 
     # passing all the data to the html file
-    return render_template('recommend.html', title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,
-                           movie_cards=movie_cards, reviews=movie_reviews, casts=casts, cast_details=cast_details)
+    return render_template('recommend.html',title=title, poster=poster, overview=overview, vote_average=vote_average,vote_count=vote_count, release_date=release_date, runtime=runtime, status=status,genres=genres,
+                            movie_cards=movie_cards, reviews=movie_reviews, casts=casts, cast_details=cast_details)
 
 if __name__ == '__main__':
     app.run(debug=True)

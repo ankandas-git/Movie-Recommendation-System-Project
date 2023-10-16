@@ -22,9 +22,9 @@
 
 <body id="content">
 	<div class="results">
-	    <center>
+
 	      <h2 id="name" class="text-uppercase">{{title}}</h2>
-	    </center>
+
 	</div>
 	<br>
 
@@ -82,10 +82,10 @@
   
   {% if casts|length > 1 %}
   <div class="movie" style="color: #E8E8E8;">
-    	<center>
+
 		<h3>TOP CAST</h3>
 		<h5>(Click on the cast to know more)</h5>
-	</center>
+
   </div>
 
   <div class="movie-content">
@@ -147,11 +147,11 @@
     {% endif %}
   </center>
 
-      {% if movie_cards|length > 1 %}
+      {% if movie_cards | length > 1 %}
 
 
       <div class="movie" style="color: #E8E8E8;">
-      <center><h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click any of the movies to get recommendation)</h5></center>
+      <h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click any of the movies to get recommendation)</h5>
     </div>
 
     <div class="movie-content">
@@ -172,10 +172,10 @@
 
     {% endif %}
 
-    
+     
     </div>
   </div>
-  
+     
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

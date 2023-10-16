@@ -67,7 +67,7 @@ function movie_recs(movie_title,movie_id,my_api_key){
     url:"/similarity",
     data:{'name':movie_title},
     success: function(recs){
-      if(recs=="Sorry! The movie is not in our database. Please check the spelling"){
+      if(recs=="Sorry! The movie you requested is not in our database. Please check the spelling or try with some other movies"){
         $('.fail').css('display','block');
         $('.results').css('display','none');
         $("#loader").delay(500).fadeOut();
@@ -96,7 +96,7 @@ function get_movie_details(movie_id,my_api_key,arr,movie_title) {
     type:'GET',
     url:'https://api.themoviedb.org/3/movie/'+movie_id+'?api_key='+my_api_key,
     success: function(movie_details){
-    show_details(movie_details,arr,movie_title,my_api_key,movie_id);
+        show_details(movie_details,arr,movie_title,my_api_key,movie_id);
     },
     error: function(){
       alert("API Error!");
