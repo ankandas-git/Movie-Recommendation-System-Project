@@ -21,10 +21,11 @@
 </head>
 
 <body id="content">
+
 	<div class="results">
-
-	      <h2 id="name" class="text-uppercase">{{title}}</h2>
-
+<center>
+	      <h2 id="name" class="text-uppercase">All about: {{title}}</h2>
+</center>
 	</div>
 	<br>
 
@@ -51,7 +52,7 @@
 <br/>
 	
 {% for name, details in cast_details.items() if not cast_details.hidden %}
-  <div class="modal fade" id="{ {details[0]} }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal fade" id="{{details[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #e50914;color: white;">
@@ -81,13 +82,14 @@
   {% endfor %}
 
   {% if casts|length > 1 %}
+    <center>
   <div class="movie" style="color: #E8E8E8;">
 
 		<h3>TOP CAST</h3>
 		<h5>(Click on the cast to know more)</h5>
 
   </div>
-
+</center>
   <div class="movie-content">
         {% for name, details in casts.items() if not casts.hidden %}
           <div class="castcard card" style="width: 15rem;" title="Click to know more about {{name}}" data-toggle="modal" data-target="#{{details[0]}}">
@@ -95,6 +97,7 @@
               <img class="card-img-top cast-img" id="{{details[0]}}" height="360" width="240" alt="{{name}} - profile" src="{{details[2]}}">
               <figcaption class="fig">
                 <button class="card-btn btn btn-danger"> Know More </button>
+
               </figcaption>
             </div>
             <div class="card-body">
@@ -105,6 +108,10 @@
       {% endfor %}
     </div>
 {% endif %}
+
+
+
+
 
   <center>
     {% if reviews %}
@@ -119,9 +126,10 @@
             </thead>
 
             <tbody>
-            { % for review, status in reviews.items() if not reviews.hidden % }
+            {% for review, status in reviews.items() if not reviews.hidden %}
             <tr style="background-color:#e5091485;">
-                <td>{{review}}</td>
+                <td> {{review}} </td>
+
                 <td>
                     <center>
                         {{status}} :
@@ -133,23 +141,22 @@
                     </center>
                 </td>
             </tr>
+            {% endfor %}
             </tbody>
-            <tbody>
-            {% endif %}
-            </tbody>
- 		 </table>
+             </table>
     </div>
+   {% else %}
     <div style="color:white;">
       <h1 style="color:white"> This movie is not released yet. Stay tuned! </h1>
     </div>
-
+    {% endif %}
   </center>
 
       {% if movie_cards | length > 1 %}
-
-
       <div class="movie" style="color: #E8E8E8;">
-      <h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click any of the movies to get recommendation)</h5>
+          <center>
+      <h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click the movies to get another recommendation)</h5>
+          </center>
     </div>
 
     <div class="movie-content">

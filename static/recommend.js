@@ -1,6 +1,7 @@
 $(function() {
   // Button will be disabled until we type anything inside the input field
   const source = document.getElementById('autoComplete');
+
   const inputHandler = function(e) {
     if(e.target.value==""){
       $('.movie-button').attr('disabled', true);
