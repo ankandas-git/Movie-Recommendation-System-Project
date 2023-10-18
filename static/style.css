@@ -4,6 +4,13 @@
 	margin-right: auto;
 	resize: none;
 }
+#top-left-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+   height: 50px;
+   width: 50px;
+}
 
 .movie-content {
 	display: flex;
