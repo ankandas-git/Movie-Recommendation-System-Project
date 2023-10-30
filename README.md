@@ -4,7 +4,7 @@
 ![API](https://img.shields.io/badge/API-TMDB-fcba03)
 
 ## Movie-Recommender-System
-we've developed a application is that we've used the TMDB's recommendation engine. Just type the movie name and click on "enter".
+
 ## Architecture
 ![Recommendation App](https://user-images.githubusercontent.com/36665975/168742738-5435cf76-1a42-4d87-94b4-999e5bfc48d3.png)
 
