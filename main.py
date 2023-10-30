@@ -64,6 +64,8 @@ app = Flask(__name__)
 
 
 @app.route("/")
+def index(): #remove this not main part
+    return render_template('index.html') #not main part
 @app.route("/home")
 def home():
     suggestions = get_suggestions()
