@@ -24,7 +24,7 @@ Genre-Based Recommendations: Users can receive recommendations based on specific
 Trending and Popular Movies: The system highlights trending and popular movies for users who want to stay up-to-date with the latest releases.
 Search and Filter: Users can search for movies and filter results by genre, release year, and more.
 
-## Architecture
+## Basic Concept: 
 ![Recommendation App](https://user-images.githubusercontent.com/36665975/168742738-5435cf76-1a42-4d87-94b4-999e5bfc48d3.png)
 ## Conclusion:
 The Movie Recommendation System is a successful application of machine learning and collaborative filtering to address the problem of content discovery in the movie industry. It enhances user satisfaction, engagement, and efficiency by providing personalized movie recommendations. The project has the potential to positively impact the viewing experience of a wide range of users.
