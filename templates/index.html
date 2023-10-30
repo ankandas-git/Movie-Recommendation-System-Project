@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="static/images/logo/e.png">
+    <title>Movie Recomendstion System</title>
+<style>
+
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-image: linear-gradient( rgba(0,0,0,0.9),rgba(0,0,0,0.9)),url('images/hero page/7.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 130vh;
+
+}
+header{
+    color:rgb(184, 179, 179);
+    display: flex;
+    height: 10vh;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+#iconbar{
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0;
+    visibility: hidden;
+}
+#iconbar:hover{
+    color: teal;
+}
+#loadHome{
+    padding: 10px 30px;
+    color: white;
+    background-color: teal;
+    text-decoration: none;
+    border-radius: 10px;
+}
+#loadHome:hover{
+    background-color: rgb(32, 99, 175);
+    color: rgb(0, 0, 0);
+}
+
+.logo{
+margin-left: 60px;
+margin-top: 50px;
+
+}
+.logo img{
+    height: 7vh;
+}
+.logo h3{
+    color:rgb(18, 241, 241);
+    font-size: 25px;
+    margin-top: -45px;
+
+    margin-left: 70px;
+}
+.nav ul{
+    display: flex;
+}
+.nav ul li{
+    list-style: none;
+}
+.nav ul li a{
+    text-decoration: none;
+    padding: 0px 20px;
+    color: rgb(227, 238, 227);
+}
+.nav ul li a:hover{
+    color: teal;
+    font-weight: bolder;
+}
+.user{
+    cursor:pointer;
+    color:teal;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+.user button{
+    padding: 10px 30px;
+    color: white;
+    background-color: teal;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.user button:hover{
+    background-color: rgb(32, 99, 175);
+    color: rgb(0, 0, 0);
+}
+.user i{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.user h4{
+    border-radius: 40px;
+    background: teal;
+    padding: 10px 20px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+.user i{
+    padding: 0px 14px;
+}
+.user h4:hover{
+    color:teal;
+    background: black;
+}
+
+
+.heropage{
+   position: absolute;
+   color:white;
+   margin-top: 100px;
+   margin-left: 100px;
+}
+.inside-heropage{
+    line-height:2;
+}
+.inside-heropage h1{
+    font-size: 40px;
+}
+.inside-heropage p{
+    font-size: 17px;
+}
+span{
+    color: teal;
+    font-weight: bold;
+
+}
+.line1{
+height: 2px;
+background-color:rgb(18, 241, 241);
+width: 12%;
+margin-left: 0px;
+margin-top: 0px;
+position: absolute;
+}
+
+.btn1{
+    margin-top: 30px;
+}
+.btn1 a{
+    background-color: teal;
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 30px;
+}
+.btn1 a:hover{
+    background: rgb(26, 138, 63);
+    color: teal;
+}
+
+.btn1 i{
+    color:rgb(35, 24, 189);
+    padding: 0px 10px;
+}
+.btn1 i:hover{
+    color: white;
+}
+.poster{
+    margin-top: 130px;
+    margin-right: 150px;
+}
+.poster img{
+    height:320px;
+    float: right;
+    border-radius: 10px;
+}
+
+.heading1{
+    color: white;
+    line-height: 1.5;
+}
+.heading1 h4{
+    font-size: 15px;
+}
+.heading1 h6{
+    font-size: 12px;
+}
+
+.btn2{
+    margin-top: -30px;
+    margin-left: 150px;
+}
+.btn2 a{
+    font-size: 13px;
+    text-decoration: none;
+    background: teal;
+    padding: 7px 7px;
+    border-radius: 10%;
+    color: white;
+
+}
+.hollywood-movies{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    background-color: black;
+    padding: 0px 20px;
+    color: white;
+    margin-top: 500px;
+    padding-top: 10px;
+    
+}
+.hollywood-movies h1{
+    font-size: 20px;
+    color:rgb(18, 241, 241);
+}
+.hollywood-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hollywood-inside h3{
+    font-size: 15px;
+    font-weight:500;
+    margin-top: 6px;
+   
+}
+.hollywood-inside img{
+   height: 250px;
+   border-radius: 10px;
+   transition: all 500ms ease-in-out;
+}
+.hollywood-inside img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.imdb{
+    background: teal;
+    border-radius:20px;
+    position:absolute;
+    padding: 10px 10px;
+    color: white;
+    margin-top: -80px;
+    margin-left: 120px;
+    font-weight: bolder;
+}
+.collywood-movies{
+    position: absolute;
+    width:100%;
+    height: 100%;
+   background-color: black;
+    padding: 0px 20px;
+    color: white;
+    margin-top: 1250px;
+}
+.collywood-movies h1{
+    font-size: 20px;
+    color:rgb(18, 241, 241);
+}
+.collywood-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.collywood-inside h3{
+    font-size: 15px;
+    font-weight:500;
+    margin-top: 6px;
+   
+}
+.collywood-inside img{
+   height: 250px;
+   transition: all 500ms ease-in-out;
+   border-radius: 10px;
+}
+.collywood-inside img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.imdb{
+    background: teal;
+    border-radius:20px;
+    position:absolute;
+    padding: 10px 10px;
+    color: white;
+    margin-top: -80px;
+    margin-left: 120px;
+    font-weight: bolder;
+}
+
+.tollywood-movies{
+    position: absolute;
+    width:100%;
+    height: 100%;
+   background-color: black;
+    padding: 0px 20px;
+    color: white;
+    margin-top: 850px;
+}
+.tollywood-movies h1{
+    font-size: 20px;
+    color:rgb(18, 241, 241);
+}
+.tollywood-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tollywood-inside h3{
+    font-size: 15px;
+    font-weight:500;
+    margin-top: 6px;
+}
+.tollywood-inside img{
+   height: 250px;
+   transition: all 500ms ease-in-out;
+   border-radius: 10px;
+}
+.tollywood-inside img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.imdb{
+    background: teal;
+    border-radius:20px;
+    position:absolute;
+    padding: 10px 10px;
+    color: white;
+    margin-top: -80px;
+    margin-left: 120px;
+    font-weight: bolder;
+}
+
+.sollywood-movies{
+    position: absolute;
+    width:100%;
+    height: 75%;
+   background-color: black;
+    padding: 0px 20px;
+    color: white;
+    margin-top: 1650px;
+}
+.sollywood-movies h1{
+    font-size: 20px;
+    color:rgb(18, 241, 241);
+}
+.sollywood-container{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sollywood-inside h3{
+    font-size: 15px;
+    font-weight:500;
+    margin-top: 6px;
+   
+}
+.sollywood-inside img{
+   height: 250px;
+   border-radius: 10px;
+   transition: all 500ms ease-in-out;
+}
+.sollywood-inside img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.imdb{
+    background: teal;
+    border-radius:20px;
+    position:absolute;
+    padding: 10px 10px;
+    color: white;
+    margin-top: -80px;
+    margin-left: 120px;
+    font-weight: bolder;
+}
+
+.akira{
+
+    position: absolute;
+    height:100%;
+    width: 100%;
+    background: black;
+    color: white;
+    margin-top: 3100px;
+}
+.line{
+    height: 2px;
+    background-color: white;
+    width: 7%;
+    margin-left: 170px;
+    position: absolute;
+}
+
+
+.heading2 p{
+    font-size: 15px;   
+}
+.like{
+    font-size: 15px;
+    float: right;
+    margin-top: -56px;
+}
+.footer{
+    position: absolute;
+    margin-top: 2060px;
+    height: 20vh;
+    color: white;
+    background:#141414;
+    width: 100%;
+}
+
+.logopart img{
+    height:7vh;
+    margin-left: 70px;
+    margin-top: -50px;
+}
+.logopart h1{
+    color:rgb(18, 241, 241);
+font-size: 25px;
+margin-top: 40px;
+margin-left: 120px;
+}
+.footer-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.copyright{
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 30px;
+    font-color: teal;
+}
+.socials i{
+    font-size: 27px;
+    margin-top: 30px;
+    padding: 0px 4px;
+    color: rgb(18, 241, 241);
+}
+.scroll{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: teal;
+    border-radius: 50px;
+    bottom: 100px;
+    right: 50px;
+    text-decoration: none;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+}
+.scroll i{
+    color: black;
+}
+.hamburger{
+    background-color: transparent;
+    border: 0;
+    color: white;
+    text-decoration: none;
+    display: none;
+    cursor: pointer;
+}
+.hamburger:focus{
+    outline: none;
+}
+
+@media(max-width:360px)
+{
+    .nav ul{
+        display: none;
+    }
+    .hamburger {
+        display: block; 
+    }
+
+
+}
+
+</style>
+
+
+
+</head>
+<body>
+    <!--Header section-->
+    <header>
+
+    <div class="logo">
+        <img src="static/images/logo/e.png" alt="">
+        <h3>Movie Recomendstion System</h3>
+    </div>
+    <div class="nav" id="small_menu">
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="#hollywood">Hollywood</a></li>
+            <li><a href="#tollywood">Tollywood</a></li>
+
+        </ul>
+    </div>
+  
+    <div class="user" id="loadHome">
+        <i class="fas fa-search"></i>
+        <button >Get Recomendation</button>
+    </div>  
+</header>
+<!----------------->
+<!--Hero section-->
+<section>
+    <div class="heropage">
+        <div class="inside-heropage">
+            <span>NOW TOP </span>
+            <div class="line1">
+            </div>
+            <h1>The Shawshank Redemption</h1>
+            <p>Action,Drama| 1994 | USA | 142 min</p>
+        </div>
+    </div>
+    <div class="poster">
+     <!------    <video width="320" height="240" autoplay muted>
+            <source src="https://www.imdb.com/video/vi3877612057/" type="video/mp4">
+          </video>  ---->
+       <img src="https://occ-0-37-33.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABQRnLpT8xpk5Gci6qAldwl00SLIFvfJHiJJiDArBvZrxYPgQfjTIeViaFUSaFskk65X-t1dKSvEJFxHt0Q53LTiEwKez3k09PRG9.jpg?r=dac" alt="">
+    </div>
+</section>
+
+        <!---Hollywood Movies-->
+        <section>
+        <div class="hollywood-movies" id="hollywood">
+           
+            <h1>HOLLYWOOD MOVIES</h1>
+            <div class="hollywood-container">
+                <div class="hollywood-inside">
+                
+                   
+                    <img src="static/images/hollywood/2.jpg" alt="">
+                   
+                    <h3>TENET</h3>
+                    <div class="imdb">
+                        <p>9.8</p>
+                      
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="static/images/hollywood/12.jpg" alt="">
+                    <h3>WW 84</h3>
+                    <div class="imdb">
+                        <p>8.5</p>
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="static/images/hollywood/13.jpg" alt="">
+                    <h3>MONOCHROME</h3>
+                    <div class="imdb">
+                        <p>9.2</p>
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="images/hollywood/14.jpg" alt="">
+                    <h3>MORTAL</h3>
+                    <div class="imdb">
+                        <p>8.5</p>
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="static/images/hollywood/15.jpg" alt="">
+                    <h3>DONT LOOK BACK</h3>
+                    <div class="imdb">
+                        <p>8.9</p>
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="static/images/hollywood/3.jpg" alt="">
+                    <h3>BLOOD HOUND</h3>
+                    <div class="imdb">
+                        <p>8.5</p>
+                    </div>
+                </div>
+                <div class="hollywood-inside">
+                    <img src="static/images/hollywood/1.jpg" alt="">
+                    <h3>REUNION</h3>
+                    <div class="imdb">
+                        <p>9.5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!------------->
+
+            <!---tollywood Movies-->
+            <section>
+                <div class="tollywood-movies" id="tollywood">
+                    <h1>TOLLYWOOD MOVIES</h1>
+                    <div class="tollywood-container">
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/a.jpg" alt="">
+                            <h3>BHEESHMA</h3>
+                            <div class="imdb">
+                                <p>9.8</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/16.jpg" alt="">
+                            <h3>BIMBISARA</h3>
+                            <div class="imdb">
+                                <p>8.5</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/19.jpg" alt="">
+                            <h3>CITIMAR</h3>
+                            <div class="imdb">
+                                <p>9.2</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/15.jpg" alt="">
+                            <h3>RAMA RAO</h3>
+                            <div class="imdb">
+                                <p>8.5</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/27.jpg" alt="">
+                            <h3>VAKEEL SAB</h3>
+                            <div class="imdb">
+                                <p>8.9</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/19.jpg" alt="">
+                            <h3>SRI KARAM</h3>
+                            <div class="imdb">
+                                <p>8.5</p>
+                            </div>
+                        </div>
+                        <div class="tollywood-inside">
+                            <img src="static/images/telugumovies/26.jpg" alt="">
+                            <h3>JERSEY</h3>
+                            <div class="imdb">
+                                <p>9.5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </section>
+            <!------------->
+
+
+              <!---collywood Movies-->
+  <section>
+    <div class="collywood-movies">
+        <h1>MOLLYWOOD MOVIES</h1>
+        <div class="collywood-container">
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/1.jpg" alt="">
+                <h3>DHRISYAM 2</h3>
+                <div class="imdb">
+                    <p>9.8</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/2.jpg" alt="">
+                <h3>A and K</h3> 
+                <div class="imdb">
+                    <p>7.5</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/3.jpg" alt="">
+                <h3>MIDNIGHT</h3>
+                <div class="imdb">
+                    <p>8.0</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/5.jpg" alt="">
+                <h3>CIA</h3>
+                <div class="imdb">
+                    <p>8.5</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/4.jpg" alt="">
+                <h3>JOHNNY</h3>
+                <div class="imdb">
+                    <p>9.0</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/6.jpg   " alt="">
+                <h3>DRIVING LICENCE</h3>
+                <div class="imdb">
+                    <p>9.2</p>
+                </div>
+            </div>
+            <div class="collywood-inside">
+                <img src="static/images/malayalam/7.jpg" alt="">
+                <h3>1971</h3>
+                <div class="imdb">
+                    <p>9.5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     </section>
+<!------------->
+
+
+   <!---sollywood Movies-->
+   <section>
+    <div class="sollywood-movies">
+        <h1>KANNADA MOVIES</h1>
+        <div class="sollywood-container">
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/a.jpg" alt="">
+                <h3>GOOGLY</h3>
+                <div class="imdb">
+                    <p>9.8</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/f.jpg" alt="">
+                <h3>ADYAKSHA</h3> 
+                <div class="imdb">
+                    <p>7.5</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/e.jpg" alt="">
+                <h3>APOORVA</h3>
+                <div class="imdb">
+                    <p>8.0</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/d.jpg" alt="">
+                <h3>ADYAKSHA 2</h3>
+                <div class="imdb">
+                    <p>8.5</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/c.jpg" alt="">
+                <h3>HAIRAVATHA</h3>
+                <div class="imdb">
+                    <p>9.0</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/b.jpg" alt="">
+                <h3>KANAKA</h3>
+                <div class="imdb">
+                    <p>9.2</p>
+                </div>
+            </div>
+            <div class="sollywood-inside">
+                <img src="static/images/kannada/a.jpg" alt="">
+                <h3>BIRBAL</h3>
+                <div class="imdb">
+                    <p>9.5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        </section>
+<!------------->       
+<!---Footer-->
+    <div class="footer">
+        <div class="inside-footer">
+            <div class="footer-container">
+                <div class="logopart">
+                    <h1>Movie Recomendstion System</h1>
+                    <img src="static/images/logo/e.png" alt="">
+                </div>
+                <div class="copyright">
+                    <p>Copyright &copy <span>   <a href="https://www.facebook.com/AnkanDas.fb" target="_blank"> Ankan Das </a> & <a href="https://www.facebook.com/profile.php?id=100080105336040" target="_blank">  Pranto Mallick </a>    </span></p>
+                </div>
+                <div class="socials">
+                    <a href="https://www.facebook.com/AnkanDas.fb" target="_blank"> <i class="fab fa-facebook-square"></i> </a>
+                    <a href="https://www.facebook.com/AnkanDas.fb" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/AnkanDas.fb" target="_blank"><i class="fab fa-instagram"></i></a>
+                   <a href="https://www.facebook.com/AnkanDas.fb" target="_blank"> <i class="fab fa-pinterest"></i> </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<!------>
+
+<!--Goto button-->
+<div class="scroll">
+    <a href=""><i class="fas fa-arrow-up"></i></a>
+</div>
+</body>
+
+
+ <script>
+        document.getElementById('loadHome').addEventListener('click', function () {
+            // Redirect to the home page when the button is clicked
+            window.location.href = '/home';
+        });
+    </script>
+
+</html>
